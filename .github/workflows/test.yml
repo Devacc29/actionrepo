@@ -2,7 +2,7 @@ name: Test workflow
 on: 
     workflow_dispatch
 jobs:
-    job1:
+    test:
         runs-on: ubuntu-latest
         steps:
             - name: Get code
@@ -15,5 +15,21 @@ jobs:
               run: npm ci
             - name: Run Tests
               run: npm test
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get code
+              uses: actions/checkout@v4
+            - name: Install Node Js
+              uses: actions/setup-node@v4
+              with:
+                node-version: 18
+            - name: install dependencies
+              run: npm ci
+            - name: Build Project
+              run: npm run build
+            - name: Deploy
+              run: echo "Deploying ......."
+
 
 
